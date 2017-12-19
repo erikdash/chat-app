@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block body %}
+    {% block javascript %}
+        <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+    {% endblock %}
+    <h1>{{ title }}</h1>
+    <ol id="messagelist">
+        {% for i in range(messages|length) %}
+            <li>
+                {{ messages[i].__repr__() }}
+            </li>
+        {% endfor %}
+    </ol>
+    <script type="text/javascript">
+        var username = '{{ username }}' ;
+        var room_id = '{{ room_id }}';
+    </script>
+    <form name="theForm">
+        New message: <input type="text" id="messageText" name="messageText" value=""/>
+        <input id="messageSend" type="button" value="send" />
+    </form>
+    <a href="{{ url_for('leave_room') }}">Leave room</a>
+{% endblock %}
